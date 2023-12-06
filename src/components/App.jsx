@@ -3,7 +3,7 @@ import { Form } from './Form/Form';
 import { nanoid } from 'nanoid';
 import { ContactsList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
-import { Container } from './App.styled';
+import css from './App.module.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export class App extends Component {
@@ -47,9 +47,9 @@ export class App extends Component {
 
   filterByName = () => {
     const { contacts, filter } = this.state;
-    const lowerfilter = filter.toLowerCase();
+    const lowerFilter = filter.toLowerCase();
     return contacts.filter(({ name }) =>
-      name.toLowerCase().includes(lowerfilter)
+      name.toLowerCase().includes(lowerFilter)
     );
   };
 
@@ -64,7 +64,7 @@ export class App extends Component {
     const visibleContacts = this.filterByName();
 
     return (
-      <Container>
+      <div className={css.container}>
         <h1>Phonebook</h1>
         <Form onSubmit={this.onSubmitForm} />
         <h2>Contacts</h2>
@@ -73,7 +73,7 @@ export class App extends Component {
           contacts={visibleContacts}
           onDeleteContacts={this.deleteContact}
         />
-      </Container>
+      </div>
     );
   }
 }

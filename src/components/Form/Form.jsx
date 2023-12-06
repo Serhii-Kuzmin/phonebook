@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import { FormStyle } from './Form.styled';
-import { InputStyle, LabelStyle, ButtonStyle } from 'components/App.styled';
+import css from './Form.module.css';
+import css from '../App.module.css';
 import PropTypes from 'prop-types';
 
 export class Form extends Component {
@@ -34,29 +34,33 @@ export class Form extends Component {
     const { name, number } = this.state;
 
     return (
-      <FormStyle onSubmit={this.onSubmitAddContact}>
-        <LabelStyle>
+      <form className={css.formStyle} onSubmit={this.onSubmitAddContact}>
+        <label className={css.labelForm}>
           Name
-          <InputStyle
+          <input
+            className={css.inputForm}
             type="text"
             name="name"
             value={name}
             required
             onChange={this.onChangeInput}
           />
-        </LabelStyle>
-        <LabelStyle>
+        </label>
+        <label className={css.labelForm}>
           Phone number
-          <InputStyle
+          <input
+            className={css.inputForm}
             type="tel"
             name="number"
             value={number}
             required
             onChange={this.onChangeInput}
           />
-        </LabelStyle>
-        <ButtonStyle type="submit">Add contact</ButtonStyle>
-      </FormStyle>
+        </label>
+        <button className={css.buttonForm} type="submit">
+          Add contact
+        </button>
+      </form>
     );
   }
 }
