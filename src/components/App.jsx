@@ -3,7 +3,7 @@ import { Form } from './Form/Form';
 import { nanoid } from 'nanoid';
 import { ContactsList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
-import css from './App.module.css';
+import { Container } from './App.styled';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export class App extends Component {
@@ -23,7 +23,7 @@ export class App extends Component {
       if (this.isNameNew(contacts, newObj) === undefined) {
         return { contacts: [...contacts, newObj] };
       } else {
-        Notify.warning(`${newObj.name} is alredy in contacts`, {
+        Notify.warning(`${newObj.name} is already in contacts`, {
           width: '400px',
           position: 'center-center',
           timeout: 3000,
@@ -64,16 +64,16 @@ export class App extends Component {
     const visibleContacts = this.filterByName();
 
     return (
-      <div className={css.container}>
+      <Container>
         <h1>Phonebook</h1>
         <Form onSubmit={this.onSubmitForm} />
         <h2>Contacts</h2>
         <Filter filter={filter} onChangeFilter={this.onChangeFilter} />
         <ContactsList
           contacts={visibleContacts}
-          onDeleteContacts={this.deleteContact}
+          onDeleteContact={this.deleteContact}
         />
-      </div>
+      </Container>
     );
   }
 }
