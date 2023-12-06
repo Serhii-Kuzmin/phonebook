@@ -1,10 +1,8 @@
 import { Component } from 'react';
 import { Form } from './Form/Form';
-import { nanoid } from 'nanoid';
 import { ContactsList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
 import { Container } from './App.styled';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export class App extends Component {
   state = {
@@ -18,17 +16,12 @@ export class App extends Component {
   };
 
   onSubmitForm = data => {
-    const newObj = { ...data, id: nanoid() };
+    const newObj = { ...data, id: crypto.randomUUID() };
     this.setState(({ contacts }) => {
       if (this.isNameNew(contacts, newObj) === undefined) {
         return { contacts: [...contacts, newObj] };
       } else {
-        Notify.warning(`${newObj.name} is already in contacts`, {
-          width: '400px',
-          position: 'center-center',
-          timeout: 3000,
-          fontSize: '20px',
-        });
+        alert(`${newObj.name} is already in contacts`);
         return { contacts: [...contacts] };
       }
     });
